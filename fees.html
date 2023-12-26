@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@500&display=swap');
+body {
+  font-family: 'Noto Sans Bengali', sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px; /* Adjust this value as needed */
+  color: black; /* Change text color as needed */
+  font-size: 24px; /* Adjust font size as needed */
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px; /* Adjust this value to add space after scrolling */
+}
+
+.payments, .dues, .others {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.payments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #FFEEF4;
+}
+
+.dues {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #FFEFE8;
+}
+
+.others {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #C5FFF8;
+  margin-bottom: 100px;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #F3EDF7; /* Change background color as needed */
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 16px;
+    margin: 5px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 10px; /* Reduce this value to make the text smaller */
+    font-weight: bold;
+}
+.button:hover {
+    background-color: #C5FFF8; /* Change to color when hovered */
+    border-radius: 15px;
+}
+
+.button:active {
+    background-color: #C5FFF8; /* Change to color when clicked */
+    border-radius: 15px;
+}
+.button span {
+    margin-top: 2px; /* Adjust this value to move the text up or down */
+}
+
+.button img {
+    width: 15px;
+    height: 15px;
+    display: block;
+    margin: 0 auto;
+}
+/* Optional: Adjustments for better spacing */
+.main-content {
+    margin-top: 20px;
+}
+
+.footer-buttons {
+    display: flex;
+}
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Font Link for Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+  <header>
+    বেতন
+  </header>
+  <div class="payments">
+    <h2>পরিশোধ</h2>
+    <h1>৳</h1>
+    <h3></h3>
+  </div>
+  <div class="dues">
+    <h2>বকেয়া</h2>
+    <h1>৳</h1>
+    <h3></h3>
+  </div>
+  <div class="others">
+    <h2>অন্যান্য</h2>
+    <h1>৳</h1>
+    <h3></h3>
+  </div>
+  <footer>
+    <div class="buttons">
+      <a class="button">
+          <i class="material-symbols-rounded">person</i>
+          <span>শিক্ষার্থী</span>
+      </a>
+  </div>
+  <div href="attendance.html?userId=1001" class="buttons">
+      <a class="button">
+          <i class="material-symbols-rounded">calendar_month</i>
+          <span>উপস্থিতি</span>
+      </a>
+  </div>
+  <div href="fees.html?userId=1001" class="buttons">
+      <a class="button">
+          <i class="material-symbols-rounded">payments</i>
+          <span>বেতন</span>
+      </a>
+      </a>
+  </div>
+  <div class="buttons">
+      <a class="button">
+          <i class="material-symbols-rounded">award_star</i>
+          <span>ফলাফল</span>
+      </a>
+  </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const firebaseConfig = {
+                apiKey: "AIzaSyBhDyy-uWtvbZSnQrCFFubX02CwznIPYp8",
+                authDomain: "bac-2012.firebaseapp.com",
+                projectId: "bac-2012",
+                storageBucket: "bac-2012.appspot.com",
+                messagingSenderId: "1080877923320",
+                appId: "1:1080877923320:web:41d0cfb6b3cb7da530740d",
+                measurementId: "G-75BX9SCCLV"
+                };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+    function updateContainer(containerClass, userId, category) {
+        const container = document.querySelector(`.${containerClass}`);
+
+        db.collection("users").doc(userId).collection(category).get()
+            .then((snapshot) => {
+                let totalAmount = 0;
+
+                snapshot.forEach((doc) => {
+                    const amount = doc.data().amount || 0;
+                    const month = doc.id;
+
+                    totalAmount += amount;
+
+                    // You can update other elements in the container as needed
+                    container.querySelector('h3').innerText = month;
+                });
+
+                const formattedAmount = `৳${totalAmount}`;
+                container.querySelector('h1').innerText = formattedAmount;
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+    }
+
+    // Fetch the user ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+
+    updateContainer("payments", userId, "payments");
+    updateContainer("dues", userId, "dues");
+    updateContainer("others", userId, "others");
+    });
+  </script>
+</body>
+
+</html>
